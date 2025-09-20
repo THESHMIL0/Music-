@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover | Harmony</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .genre-card {
+            transition: all 0.3s ease;
+        }
+        .genre-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-feather="music" class="text-blue-400"></i>
+                <span class="text-xl font-bold">Harmony</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+                <a href="#" class="text-blue-400 transition">Discover</a>
+                <a href="#" class="hover:text-blue-400 transition">Genres</a>
+                <a href="#" class="hover:text-blue-400 transition">Artists</a>
+                <a href="#" class="hover:text-blue-400 transition">Playlists</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-gray-700 transition">
+                    <i data-feather="search"></i>
+                </button>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-700 transition">
+                    <i data-feather="menu"></i>
+                </button>
+                <button class="hidden md:block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full transition">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Discover Content -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold mb-10" data-aos="fade-right">Discover New Music</h1>
+            
+            <!-- New Releases -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold mb-6" data-aos="fade-right">New Releases</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <!-- Album Cards -->
+                    <div class="bg-gray-800 rounded-lg p-4 genre-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="http://static.photos/music/640x360/11" alt="Album" class="w-full rounded mb-4">
+                        <h3 class="font-semibold">Album Title</h3>
+                        <p class="text-gray-400 text-sm">Artist Name</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 genre-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="http://static.photos/music/640x360/12" alt="Album" class="w-full rounded mb-4">
+                        <h3 class="font-semibold">Album Title</h3>
+                        <p class="text-gray-400 text-sm">Artist Name</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 genre-card" data-aos="fade-up" data-aos-delay="300">
+                        <img src="http://static.photos/music/640x360/13" alt="Album" class="w-full rounded mb-4">
+                        <h3 class="font-semibold">Album Title</h3>
+                        <p class="text-gray-400 text-sm">Artist Name</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 genre-card" data-aos="fade-up" data-aos-delay="400">
+                        <img src="http://static.photos/music/640x360/14" alt="Album" class="w-full rounded mb-4">
+                        <h3 class="font-semibold">Album Title</h3>
+                        <p class="text-gray-400 text-sm">Artist Name</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 genre-card" data-aos="fade-up" data-aos-delay="500">
+                        <img src="http://static.photos/music/640x360/15" alt="Album" class="w-full rounded mb-4">
+                        <h3 class="font-semibold">Album Title</h3>
+                        <p class="text-gray-400 text-sm">Artist Name</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Popular Genres -->
+            <div class="mb-16">
+                <h2 class="text-2xl font-bold mb-6" data-aos="fade-right">Popular Genres</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div class="bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg p-6 genre-card" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="font-bold">Pop</h3>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-600 to-pink-500 rounded-lg p-6 genre-card" data-aos="fade-up" data-aos-delay="150">
+                        <h3 class="font-bold">Rock</h3>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-600 to-teal-500 rounded-lg p-6 genre-card" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="font-bold">Hip Hop</h3>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-600 to-orange-500 rounded-lg p-6 genre-card" data-aos="fade-up" data-aos-delay="250">
+                        <h3 class="font-bold">Electronic</h3>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-600 to-purple-500 rounded-lg p-6 genre-card" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="font-bold">R&B</h3>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-600 to-cyan-500 rounded-lg p-6 genre-card" data-aos="fade-up" data-aos-delay="350">
+                        <h3 class="font-bold">Jazz</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommended Artists -->
+            <div>
+                <h2 class="text-2xl font-bold mb-6" data-aos="fade-right">Recommended Artists</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+                            <img src="http://static.photos/people/200x200/1" alt="Artist" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-medium">Artist Name</h3>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="150">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+                            <img src="http://static.photos/people/200x200/2" alt="Artist" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-medium">Artist Name</h3>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+                            <img src="http://static.photos/people/200x200/3" alt="Artist" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-medium">Artist Name</h3>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="250">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+                            <img src="http://static.photos/people/200x200/4" alt="Artist" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-medium">Artist Name</h3>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+                            <img src="http://static.photos/people/200x200/5" alt="Artist" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-medium">Artist Name</h3>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="350">
+                        <div class="w-24 h-24 mx-auto rounded-full overflow-hidden mb-3">
+                            <img src="http://static.photos/people/200x200/6" alt="Artist" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-medium">Artist Name</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Player -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 music-player z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 w-1/4">
+                    <img src="http://static.photos/music/200x200/7" alt="Album" class="w-12 h-12 rounded">
+                    <div>
+                        <h4 class="font-medium">Current Song</h4>
+                        <p class="text-sm text-gray-400">Artist Name</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="heart"></i>
+                    </button>
+                </div>
+                
+                <div class="w-2/4">
+                    <div class="flex justify-center space-x-6 mb-2">
+                        <button class="text-gray-400 hover:text-white">
+                            <i data-feather="skip-back"></i>
+                        </button>
+                        <button class="bg-white text-gray-900 p-2 rounded-full hover:bg-gray-200">
+                            <i data-feather="play"></i>
+                        </button>
+                        <button class="text-gray-400 hover:text-white">
+                            <i data-feather="skip-forward"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs text-gray-400">1:23</span>
+                        <div class="progress-bar flex-grow rounded-full">
+                            <div class="progress rounded-full"></div>
+                        </div>
+                        <span class="text-xs text-gray-400">3:45</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-end space-x-4 w-1/4">
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="repeat"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="shuffle"></i>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <i data-feather="volume-2" class="text-gray-400"></i>
+                        <div class="w-20 h-1 bg-gray-600 rounded-full">
+                            <div class="h-1 bg-blue-500 rounded-full w-3/4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>AOS.init();</script>
+    <script>feather.replace();</script>
+</body>
+  </html>
