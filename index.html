@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberpunk RPG Adventure</title>
+    <title>AI Text RPG Adventure</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,247 +14,163 @@
         }
         
         body {
-            background: linear-gradient(135deg, #0a0a0a, #001a00);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            color: #00ff00;
-            overflow-x: hidden;
+            color: #e0e0e0;
         }
         
         .game-container {
             width: 95%;
-            max-width: 1200px;
-            background-color: rgba(10, 15, 10, 0.95);
+            max-width: 1000px;
+            background: rgba(20, 25, 35, 0.9);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
             height: 90vh;
-            border: 1px solid #00ff00;
         }
         
         header {
-            background: linear-gradient(to right, #001000, #003300);
+            background: linear-gradient(90deg, #2a3c4f, #1a2836);
             padding: 15px;
             text-align: center;
-            border-bottom: 2px solid #00ff00;
             position: relative;
+            border-bottom: 1px solid rgba(100, 150, 200, 0.3);
         }
         
         h1 {
-            font-size: 2.8rem;
-            text-shadow: 0 0 10px #00ff00;
+            font-size: 2.5rem;
             margin-bottom: 5px;
             letter-spacing: 2px;
             font-weight: 700;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #00cc00;
-            margin-bottom: 10px;
+            color: #66c0f4;
+            text-shadow: 0 0 10px rgba(100, 180, 255, 0.7);
         }
         
         .main-content {
             display: flex;
             flex: 1;
-            padding: 20px;
-            gap: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(0,20,0,0.5)"/><path d="M0 0L100 100" stroke="rgba(0,80,0,0.2)" stroke-width="1"/><path d="M100 0L0 100" stroke="rgba(0,80,0,0.2)" stroke-width="1"/></svg>');
-        }
-        
-        .game-area {
-            flex: 3;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            padding: 0;
+            gap: 0;
         }
         
         .stats-container {
-            background-color: rgba(0, 20, 0, 0.8);
-            border-radius: 10px;
+            background: rgba(25, 35, 45, 0.95);
             padding: 15px;
-            display: flex;
-            justify-content: space-around;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            border-bottom: 1px solid rgba(100, 150, 200, 0.2);
         }
         
         .stat {
             text-align: center;
             padding: 10px;
+            background: rgba(30, 40, 50, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
         
         .stat-label {
-            font-size: 1rem;
-            color: #00cc00;
+            font-size: 0.9rem;
+            color: #8bb9e0;
             margin-bottom: 5px;
         }
         
         .stat-value {
-            font-size: 1.8rem;
-            color: #00ff00;
+            font-size: 1.6rem;
+            color: #ffffff;
             font-weight: bold;
-            text-shadow: 0 0 5px #00ff00;
+            text-shadow: 0 0 8px rgba(100, 180, 255, 0.7);
         }
         
         .game-screen {
-            background-color: rgba(0, 15, 0, 0.9);
-            border-radius: 10px;
-            padding: 25px;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+            padding: 0;
         }
         
-        .screen-content {
-            text-align: center;
-            z-index: 2;
-            width: 100%;
-        }
-        
-        .screen-content h2 {
-            color: #00ff00;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            text-shadow: 0 0 10px #00ff00;
-            letter-spacing: 1px;
-        }
-        
-        .screen-content p {
-            margin-bottom: 20px;
+        .text-display {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(20, 30, 40, 0.8)"/><path d="M0 0L100 100" stroke="rgba(60, 120, 180, 0.1)" stroke-width="1"/><path d="M100 0L0 100" stroke="rgba(60, 120, 180, 0.1)" stroke-width="1"/></svg>');
             line-height: 1.6;
             font-size: 1.2rem;
-            color: #00cc00;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid #00ff00;
+            color: #d0e5ff;
+            text-shadow: 0 0 5px rgba(100, 180, 255, 0.3);
         }
         
-        .controls {
-            display: flex;
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
+            padding: 25px;
+            background: rgba(25, 35, 45, 0.95);
+            border-top: 1px solid rgba(100, 150, 200, 0.2);
         }
         
         button {
-            padding: 15px 25px;
+            padding: 18px;
             border: none;
             border-radius: 8px;
-            background: linear-gradient(to bottom, #00aa00, #008800);
-            color: #000;
+            background: linear-gradient(to bottom, #3a6c8e, #2a4c6e);
+            color: white;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
             font-size: 1.1rem;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 10px;
         }
         
         button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.5);
-            background: linear-gradient(to bottom, #00ff00, #00aa00);
-            color: #001000;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to bottom, #4a8cae, #3a6c8e);
         }
         
         button:active {
             transform: translateY(2px);
         }
         
-        .action-btn {
-            background: linear-gradient(to bottom, #00ff00, #00aa00);
+        .combat-btn {
+            background: linear-gradient(to bottom, #9c3c3c, #7c1c1c);
         }
         
-        .inventory-btn {
-            background: linear-gradient(to bottom, #00cc00, #008800);
+        .combat-btn:hover {
+            background: linear-gradient(to bottom, #bc5c5c, #9c3c3c);
         }
         
-        .quest-btn {
-            background: linear-gradient(to bottom, #00aa00, #006600);
+        .heal-btn {
+            background: linear-gradient(to bottom, #3c9c5c, #1c7c3c);
         }
         
-        .sidebar {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .heal-btn:hover {
+            background: linear-gradient(to bottom, #5cbc7c, #3c9c5c);
         }
         
-        .inventory-container, .quest-container {
-            background-color: rgba(0, 20, 0, 0.8);
-            border-radius: 10px;
-            padding: 20px;
-            flex: 1;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-        }
-        
-        .inventory-container h3, .quest-container h3 {
-            text-align: center;
+        .story-text {
             margin-bottom: 20px;
-            color: #00ff00;
-            font-size: 1.6rem;
-            text-shadow: 0 0 5px #00ff00;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #00ff00;
+            line-height: 1.8;
+            font-size: 1.3rem;
         }
         
-        .inventory-items, .quest-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .item, .quest {
-            background-color: rgba(0, 30, 0, 0.7);
-            padding: 12px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-left: 3px solid #00ff00;
-            transition: all 0.3s;
-        }
-        
-        .item:hover, .quest:hover {
-            transform: translateX(5px);
-            background-color: rgba(0, 40, 0, 0.8);
-        }
-        
-        .item-icon {
-            width: 35px;
-            height: 35px;
-            background-color: #00aa00;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .enemy {
+        .enemy-display {
+            text-align: center;
+            margin: 20px 0;
             font-size: 4rem;
-            margin: 25px 0;
+            text-shadow: 0 0 15px rgba(255, 80, 80, 0.7);
             animation: pulse 2s infinite;
-            text-shadow: 0 0 20px #00ff00;
         }
         
         @keyframes pulse {
@@ -264,87 +180,60 @@
         }
         
         .health-bar {
-            width: 80%;
+            width: 100%;
             height: 25px;
-            background-color: #002200;
+            background-color: #2a3c4f;
             border-radius: 12px;
             margin: 15px 0;
             overflow: hidden;
-            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         
         .health-fill {
             height: 100%;
-            background: linear-gradient(to right, #00ff00, #00aa00);
+            background: linear-gradient(to right, #ff5500, #ff0000);
             width: 70%;
             border-radius: 12px;
             transition: width 0.5s;
-            box-shadow: 0 0 10px #00ff00;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
         }
         
         .battle-log {
             margin-top: 25px;
             height: 120px;
             overflow-y: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.3);
             padding: 15px;
             border-radius: 8px;
             text-align: left;
-            border: 1px solid #00ff00;
+            border: 1px solid rgba(100, 150, 200, 0.2);
         }
         
         .log-entry {
             margin-bottom: 8px;
-            color: #00ff00;
+            color: #ffcc00;
             font-size: 1rem;
             padding: 5px;
-            border-left: 2px solid #00ff00;
-            background-color: rgba(0, 20, 0, 0.3);
+            border-left: 2px solid #ffcc00;
+            background-color: rgba(0, 0, 0, 0.2);
         }
         
         footer {
             text-align: center;
             padding: 15px;
-            background-color: rgba(0, 20, 0, 0.9);
-            border-top: 1px solid #00ff00;
+            background-color: rgba(20, 30, 40, 0.9);
+            border-top: 1px solid rgba(100, 150, 200, 0.2);
             font-size: 1rem;
-            color: #00aa00;
+            color: #8bb9e0;
         }
         
-        .cyberpunk-line {
-            height: 2px;
-            background: linear-gradient(to right, transparent, #00ff00, transparent);
-            margin: 15px 0;
-            width: 100%;
-        }
-        
-        @media (max-width: 900px) {
-            .main-content {
-                flex-direction: column;
+        @media (max-width: 768px) {
+            .action-buttons {
+                grid-template-columns: 1fr;
             }
             
-            .game-container {
-                height: auto;
-                min-height: 90vh;
-            }
-            
-            .sidebar {
-                flex-direction: row;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .sidebar {
-                flex-direction: column;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            button {
-                width: 80%;
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             h1 {
@@ -360,217 +249,328 @@
 <body>
     <div class="game-container">
         <header>
-            <h1>CYBERPUNK RPG ADVENTURE</h1>
-            <div class="subtitle">Embark on an epic journey in a digital world</div>
+            <h1>AI Text RPG Adventure</h1>
         </header>
         
-        <div class="main-content">
-            <div class="game-area">
-                <div class="stats-container">
-                    <div class="stat">
-                        <div class="stat-label">HEALTH</div>
-                        <div class="stat-value" id="health">100/100</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-label">LEVEL</div>
-                        <div class="stat-value" id="level">1</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-label">CREDITS</div>
-                        <div class="stat-value" id="gold">50</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-label">EXPERIENCE</div>
-                        <div class="stat-value" id="xp">0/100</div>
-                    </div>
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-label">Player HP</div>
+                <div class="stat-value" id="player-hp">100</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Strength</div>
+                <div class="stat-value" id="player-str">33</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Level</div>
+                <div class="stat-value" id="player-lvl">12</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">XP</div>
+                <div class="stat-value" id="player-xp">105</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Enemy HP</div>
+                <div class="stat-value" id="enemy-hp">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Gold</div>
+                <div class="stat-value" id="player-gold">395</div>
+            </div>
+        </div>
+        
+        <div class="game-screen">
+            <div class="text-display">
+                <div class="story-text">
+                    <p>You stand at a crossroad in a mystical land. The air is filled with magic, and adventure awaits in every direction. Where will you go?</p>
                 </div>
                 
-                <div class="game-screen">
-                    <div class="screen-content">
-                        <h2 id="location">NEON FOREST</h2>
-                        <div class="cyberpunk-line"></div>
-                        <p id="scene-description">You are on a path through a dense digital forest. Neon trees glow with green light and data streams flow through the air. You hear the hum of servers in the distance.</p>
-                        
-                        <div class="enemy" id="enemy-display">👾</div>
-                        
-                        <div class="health-bar">
-                            <div class="health-fill" id="health-bar"></div>
-                        </div>
-                        
-                        <div class="battle-log" id="battle-log">
-                            <div class="log-entry">System initialized. Welcome to Cyberpunk RPG Adventure!</div>
-                            <div class="log-entry">Your mission is to restore balance to the digital world.</div>
-                        </div>
-                        
-                        <div class="controls">
-                            <button id="action-btn"><i class="fas fa-bolt"></i> Explore</button>
-                            <button id="inventory-btn"><i class="fas fa-backpack"></i> Inventory</button>
-                            <button id="quest-btn"><i class="fas fa-tasks"></i> Quests</button>
-                            <button id="heal-btn"><i class="fas fa-first-aid"></i> Heal</button>
-                        </div>
-                    </div>
+                <div class="enemy-display" id="enemy-display">⚔️</div>
+                
+                <div class="health-bar">
+                    <div class="health-fill" id="health-bar"></div>
+                </div>
+                
+                <div class="battle-log" id="battle-log">
+                    <div class="log-entry">Welcome to the world of adventure!</div>
+                    <div class="log-entry">Your journey begins at the crossroad...</div>
                 </div>
             </div>
             
-            <div class="sidebar">
-                <div class="inventory-container">
-                    <h3>INVENTORY</h3>
-                    <div class="inventory-items" id="inventory">
-                        <div class="item">
-                            <div class="item-icon">⚔️</div>
-                            <div class="item-name">Laser Sword</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-icon">🛡️</div>
-                            <div class="item-name">Energy Shield</div>
-                        </div>
-                        <div class="item">
-                            <div class="item-icon">❤️</div>
-                            <div class="item-name">Health Injector (3)</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="quest-container">
-                    <h3>ACTIVE MISSIONS</h3>
-                    <div class="quest-list" id="quests">
-                        <div class="quest">
-                            <div class="item-icon">⭐</div>
-                            <div class="quest-details">Defeat 5 rogue programs (0/5)</div>
-                        </div>
-                        <div class="quest">
-                            <div class="item-icon">⭐</div>
-                            <div class="quest-details">Collect 10 data fragments (0/10)</div>
-                        </div>
-                        <div class="quest">
-                            <div class="item-icon">⭐</div>
-                            <div class="quest-details">Restore the central server</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="action-buttons">
+                <button id="forest-btn">
+                    <i class="fas fa-tree"></i> Enter the Forest
+                </button>
+                <button id="cave-btn">
+                    <i class="fas fa-mountain"></i> Explore the Cave
+                </button>
+                <button id="swamp-btn">
+                    <i class="fas fa-water"></i> Explore the Swamp
+                </button>
+                <button id="village-btn">
+                    <i class="fas fa-home"></i> Visit the Village
+                </button>
+                <button id="attack-btn" class="combat-btn">
+                    <i class="fas fa-fist-raised"></i> Attack
+                </button>
+                <button id="heal-btn" class="heal-btn">
+                    <i class="fas fa-heart"></i> Use Potion
+                </button>
             </div>
         </div>
         
         <footer>
-            <p>Cyberpunk RPG Adventure | Created for GitHub Deployment | All systems operational</p>
+            <p>AI Text RPG Adventure | Choose your path wisely</p>
         </footer>
     </div>
 
     <script>
         // Game state
         const gameState = {
-            health: 100,
-            maxHealth: 100,
-            level: 1,
-            xp: 0,
-            xpToNextLevel: 100,
-            gold: 50,
-            location: 'forest',
+            player: {
+                hp: 100,
+                maxHp: 100,
+                strength: 33,
+                level: 12,
+                xp: 105,
+                gold: 395,
+                potions: 10
+            },
+            enemy: {
+                hp: 0,
+                maxHp: 0,
+                name: "",
+                type: "",
+                damage: 0,
+                xp: 0,
+                gold: 0
+            },
+            location: "crossroad",
             inCombat: false,
-            enemy: null,
-            enemyHealth: 0,
-            enemyMaxHealth: 0,
-            inventory: [
-                { id: 1, name: 'Laser Sword', type: 'weapon', icon: '⚔️' },
-                { id: 2, name: 'Energy Shield', type: 'armor', icon: '🛡️' },
-                { id: 3, name: 'Health Injector', type: 'potion', icon: '❤️', quantity: 3 }
-            ],
-            quests: [
-                { id: 1, name: 'Rogue Programs', description: 'Defeat 5 rogue programs', completed: false, progress: 0, target: 5, reward: { xp: 50, gold: 25 } },
-                { id: 2, name: 'Data Fragments', description: 'Collect 10 data fragments', completed: false, progress: 0, target: 10, reward: { xp: 30, gold: 50 } }
+            gameLog: [
+                "Welcome to the world of adventure!",
+                "Your journey begins at the crossroad..."
             ]
         };
 
         // Enemy types
-        const enemies = [
-            { name: 'Virus Bot', health: 30, icon: '🤖', minLevel: 1, xp: 15, gold: 5 },
-            { name: 'Glitch Spirit', health: 40, icon: '👻', minLevel: 1, xp: 20, gold: 8 },
-            { name: 'Firewall Guardian', health: 60, icon: '🐉', minLevel: 2, xp: 30, gold: 15 },
-            { name: 'Data Pirate', health: 50, icon: '🧟', minLevel: 2, xp: 25, gold: 12 }
-        ];
-
-        // Locations
-        const locations = {
+        const enemies = {
             forest: {
-                name: 'Neon Forest',
-                description: 'You are on a path through a dense digital forest. Neon trees glow with green light and data streams flow through the air. You hear the hum of servers in the distance.',
-                enemies: ['Virus Bot', 'Glitch Spirit']
+                name: "Forest Troll",
+                type: "troll",
+                hp: 80,
+                damage: 12,
+                xp: 25,
+                gold: 18
             },
             cave: {
-                name: 'Data Caverns',
-                description: 'You enter a cavern made of crystalized data. Code fragments float in the air and the walls pulse with energy. Your footsteps echo in the silence.',
-                enemies: ['Glitch Spirit', 'Firewall Guardian']
+                name: "Cave Bear",
+                type: "bear",
+                hp: 100,
+                damage: 15,
+                xp: 35,
+                gold: 25
             },
-            village: {
-                name: 'Node Village',
-                description: 'You arrive at a settlement built around a major network node. Programs go about their daily tasks. The village seems peaceful but alert.',
-                enemies: ['Data Pirate']
+            swamp: {
+                name: "Swamp Serpent",
+                type: "serpent",
+                hp: 70,
+                damage: 18,
+                xp: 30,
+                gold: 22
             }
         };
 
         // DOM elements
-        const healthElement = document.getElementById('health');
-        const levelElement = document.getElementById('level');
-        const goldElement = document.getElementById('gold');
-        const xpElement = document.getElementById('xp');
-        const locationElement = document.getElementById('location');
-        const sceneDescriptionElement = document.getElementById('scene-description');
+        const playerHpElement = document.getElementById('player-hp');
+        const playerStrElement = document.getElementById('player-str');
+        const playerLvlElement = document.getElementById('player-lvl');
+        const playerXpElement = document.getElementById('player-xp');
+        const enemyHpElement = document.getElementById('enemy-hp');
+        const playerGoldElement = document.getElementById('player-gold');
         const enemyDisplayElement = document.getElementById('enemy-display');
         const healthBarElement = document.getElementById('health-bar');
         const battleLogElement = document.getElementById('battle-log');
-        const actionBtn = document.getElementById('action-btn');
-        const inventoryBtn = document.getElementById('inventory-btn');
-        const questBtn = document.getElementById('quest-btn');
+        const storyTextElement = document.querySelector('.story-text');
+        
+        // Buttons
+        const forestBtn = document.getElementById('forest-btn');
+        const caveBtn = document.getElementById('cave-btn');
+        const swampBtn = document.getElementById('swamp-btn');
+        const villageBtn = document.getElementById('village-btn');
+        const attackBtn = document.getElementById('attack-btn');
         const healBtn = document.getElementById('heal-btn');
 
         // Initialize game
         function initGame() {
             updateStats();
-            updateLocation();
             
             // Event listeners
-            actionBtn.addEventListener('click', handleAction);
-            inventoryBtn.addEventListener('click', showInventory);
-            questBtn.addEventListener('click', showQuests);
-            healBtn.addEventListener('click', useHealthPotion);
+            forestBtn.addEventListener('click', () => enterLocation('forest'));
+            caveBtn.addEventListener('click', () => enterLocation('cave'));
+            swampBtn.addEventListener('click', () => enterLocation('swamp'));
+            villageBtn.addEventListener('click', visitVillage);
+            attackBtn.addEventListener('click', attackEnemy);
+            healBtn.addEventListener('click', usePotion);
             
-            addLogEntry('Game initialized. All systems operational.');
+            // Hide combat buttons initially
+            attackBtn.style.display = 'none';
+            healBtn.style.display = 'none';
         }
 
         // Update game stats display
         function updateStats() {
-            healthElement.textContent = `${gameState.health}/${gameState.maxHealth}`;
-            levelElement.textContent = gameState.level;
-            goldElement.textContent = gameState.gold;
-            xpElement.textContent = `${gameState.xp}/${gameState.xpToNextLevel}`;
-            healthBarElement.style.width = `${(gameState.health / gameState.maxHealth) * 100}%`;
+            playerHpElement.textContent = gameState.player.hp;
+            playerStrElement.textContent = gameState.player.strength;
+            playerLvlElement.textContent = gameState.player.level;
+            playerXpElement.textContent = gameState.player.xp;
+            enemyHpElement.textContent = gameState.enemy.hp;
+            playerGoldElement.textContent = gameState.player.gold;
+            healthBarElement.style.width = `${(gameState.player.hp / gameState.player.maxHp) * 100}%`;
         }
 
-        // Update location display
-        function updateLocation() {
-            const location = locations[gameState.location];
-            locationElement.textContent = location.name;
-            sceneDescriptionElement.textContent = location.description;
+        // Enter a location (forest, cave, swamp)
+        function enterLocation(location) {
+            if (gameState.inCombat) return;
+            
+            gameState.location = location;
+            gameState.inCombat = true;
+            
+            // Set enemy based on location
+            gameState.enemy = {...enemies[location]};
+            gameState.enemy.maxHp = gameState.enemy.hp;
+            
+            // Update display
+            storyTextElement.innerHTML = `<p>You enter the ${location} and encounter a ${gameState.enemy.name}!</p>`;
+            enemyDisplayElement.textContent = getEnemyEmoji(gameState.enemy.type);
+            updateStats();
+            
+            // Show combat buttons
+            attackBtn.style.display = 'flex';
+            healBtn.style.display = 'flex';
+            
+            // Hide location buttons
+            forestBtn.style.display = 'none';
+            caveBtn.style.display = 'none';
+            swampBtn.style.display = 'none';
+            villageBtn.style.display = 'none';
+            
+            addLogEntry(`A wild ${gameState.enemy.name} appears!`);
         }
 
-        // Handle main action button
-        function handleAction() {
-            if (gameState.inCombat) {
-                attackEnemy();
+        // Visit the village
+        function visitVillage() {
+            if (gameState.inCombat) return;
+            
+            gameState.player.hp = gameState.player.maxHp;
+            gameState.player.potions += 5;
+            gameState.player.gold -= 50;
+            
+            if (gameState.player.gold < 0) gameState.player.gold = 0;
+            
+            storyTextElement.innerHTML = `<p>You visit the village and rest at the inn. Your health is restored and you bought 5 potions for 50 gold.</p>`;
+            updateStats();
+            
+            addLogEntry("You visited the village and restored your health.");
+        }
+
+        // Attack enemy
+        function attackEnemy() {
+            if (!gameState.inCombat) return;
+            
+            // Player attacks
+            const playerDamage = Math.floor(Math.random() * gameState.player.strength / 2) + gameState.player.strength / 2;
+            gameState.enemy.hp -= playerDamage;
+            
+            addLogEntry(`You hit the ${gameState.enemy.name} for ${playerDamage} damage!`);
+            
+            // Check if enemy is defeated
+            if (gameState.enemy.hp <= 0) {
+                gameState.enemy.hp = 0;
+                defeatEnemy();
+                return;
+            }
+            
+            // Enemy attacks
+            const enemyDamage = Math.floor(Math.random() * gameState.enemy.damage / 2) + gameState.enemy.damage / 2;
+            gameState.player.hp -= enemyDamage;
+            
+            addLogEntry(`The ${gameState.enemy.name} hits you for ${enemyDamage} damage!`);
+            
+            // Check if player is defeated
+            if (gameState.player.hp <= 0) {
+                gameState.player.hp = 0;
+                addLogEntry('You have been defeated! You wake up back at the crossroad with half health.');
+                gameState.inCombat = false;
+                gameState.player.hp = gameState.player.maxHp / 2;
+                
+                // Show location buttons
+                attackBtn.style.display = 'none';
+                healBtn.style.display = 'none';
+                forestBtn.style.display = 'flex';
+                caveBtn.style.display = 'flex';
+                swampBtn.style.display = 'flex';
+                villageBtn.style.display = 'flex';
+                
+                storyTextElement.innerHTML = `<p>You wake up back at the crossroad, feeling weak from your defeat.</p>`;
+            }
+            
+            updateStats();
+        }
+
+        // Use health potion
+        function usePotion() {
+            if (!gameState.inCombat) return;
+            
+            if (gameState.player.potions > 0) {
+                gameState.player.hp += 30;
+                if (gameState.player.hp > gameState.player.maxHp) gameState.player.hp = gameState.player.maxHp;
+                gameState.player.potions--;
+                
+                addLogEntry(`You used a health potion and recovered 30 HP!`);
+                updateStats();
             } else {
-                explore();
+                addLogEntry("You don't have any potions left!");
             }
         }
 
-        // Explore the current location
-        function explore() {
-            const rand = Math.random();
+        // Handle enemy defeat
+        function defeatEnemy() {
+            addLogEntry(`You defeated the ${gameState.enemy.name}!`);
             
-            if (rand < 0.6) {
-                // Encounter an enemy
-                startCombat();
-            } else if (rand < 0.8) {
-                // Find gold
-                const goldFound = Math.floor(Math.random() * 10) + 5;
-                gameState.gold += goldFound;
+            // Award XP and gold
+            gameState.player.xp += gameState.enemy.xp;
+            gameState.player.gold += gameState.enemy.gold;
+            
+            addLogEntry(`Gained ${gameState.enemy.xp} XP and ${gameState.enemy.gold} gold!`);
+            
+            // Check for level up
+            if (gameState.player.xp >= gameState.player.level * 100) {
+                gameState.player.level++;
+                gameState.player.strength += 5;
+                gameState.player.maxHp += 20;
+                gameState.player.hp = gameState.player.maxHp;
+                
+                addLogEntry(`You reached level ${gameState.player.level}! Strength and health increased.`);
+            }
+            
+            // Reset combat state
+            gameState.inCombat = false;
+            
+            // Show location buttons
+            attackBtn.style.display = 'none';
+            healBtn.style.display = 'none';
+            forestBtn.style.display = 'flex';
+            caveBtn.style.display = 'flex';
+            swampBtn.style.display = 'flex';
+            villageBtn.style.display = 'flex';
+            
+            storyTextElement.innerHTML = `<p>You defeated the ${gameState.enemy.name} and returned to the crossroad.</p>`;
+            
+            updateStats();
+        }
+
+        // Get enemy emoji based on type
+        function getEnemyEmoji(type) {
+            switch(type) {
                 
