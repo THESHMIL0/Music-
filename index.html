@@ -3,202 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harmony | Music Streaming</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <title>RPG Adventure</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         body {
-            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
         }
-        .music-player {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        .game-container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
         }
-        .progress-bar {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #f1c40f;
         }
-        .progress {
+        
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex: 1;
+            padding: 15px;
+            gap: 15px;
+        }
+        
+        .game-area {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .stats-container {
+            background-color: rgba(40, 40, 40, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            border: 2px solid #f1c40f;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            color: #f1c40f;
+            font-weight: bold;
+        }
+        
+        .game-screen {
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .screen-content {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .screen-content h2 {
+            color: #f1c40f;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .screen-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, #3cb0fd, #3498db);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .action-btn {
+            background: linear-gradient(to bottom, #e74c3c, #c0392b);
+        }
+        
+        .inventory-btn {
+            background: linear-gradient(to bottom, #2ecc71, #27ae60);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .inventory-container, .quest-container {
+            background-color: rgba(40, 40, 40, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            flex: 1;
+            border: 2px solid #2ecc71;
+        }
+        
+        .inventory-container h3, .quest-container h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #2ecc71;
+            font-size: 1.4rem;
+        }
+        
+        .inventory-items, .quest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .item, .quest {
+            background-color: rgba(60, 60, 60, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .item-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #f1c40f;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .enemy {
+            font-size: 3rem;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .health-bar {
+            width: 80%;
+            height: 20px;
+            background-color: #555;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .health-fill {
             height: 100%;
-            background: #3b82f6;
-            width: 30%;
+            background: linear-gradient(to right, #e74c3c, #2ecc71);
+            width: 70%;
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+        
+        .battle-log {
+            margin-top: 20px;
+            height: 100px;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            color: #f1c40f;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .game-container {
+                height: auto;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen" id="vanta-bg">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i data-feather="music" class="text-blue-400"></i>
-                <span class="text-xl font-bold">Harmony</span>
-            </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="#" class="hover:text-blue-400 transition">Discover</a>
-                <a href="#" class="hover:text-blue-400 transition">Genres</a>
-                <a href="#" class="hover:text-blue-400 transition">Artists</a>
-                <a href="#" class="hover:text-blue-400 transition">Playlists</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="p-2 rounded-full hover:bg-gray-700 transition">
-                    <i data-feather="search"></i>
-                </button>
-                <button class="md:hidden p-2 rounded-full hover:bg-gray-700 transition">
-                    <i data-feather="menu"></i>
-                </button>
-                <button class="hidden md:block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full transition">
-                    Sign In
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4">
-        <div class="container mx-auto text-center" data-aos="fade-up">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">Listen to Your Favorite <span class="text-blue-400">Music</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">Stream millions of songs, discover new artists, and create your perfect playlist.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full text-lg font-medium transition transform hover:scale-105">
-                    Start Listening Free
-                </button>
-                <button class="bg-transparent border-2 border-gray-600 hover:border-blue-400 px-8 py-4 rounded-full text-lg font-medium transition transform hover:scale-105">
-                    Explore Premium
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Playlists -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-10" data-aos="fade-right">Featured Playlists</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                <!-- Playlist Cards -->
-                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                    <img src="http://static.photos/music/640x360/1" alt="Playlist" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold">Chill Vibes</h3>
-                        <p class="text-gray-400 text-sm">120 songs</p>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>RPG Adventure</h1>
+            <p>Embark on an epic journey!</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="game-area">
+                <div class="stats-container">
+                    <div class="stat">
+                        <div class="stat-label">Health</div>
+                        <div class="stat-value" id="health">100/100</div>
                     </div>
-                </div>
-                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="200">
-                    <img src="http://static.photos/music/640x360/2" alt="Playlist" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold">Workout Mix</h3>
-                        <p class="text-gray-400 text-sm">85 songs</p>
+                    <div class="stat">
+                        <div class="stat-label">Level</div>
+                        <div class="stat-value" id="level">1</div>
                     </div>
-                </div>
-                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                    <img src="http://static.photos/music/640x360/3" alt="Playlist" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold">Focus Flow</h3>
-                        <p class="text-gray-400 text-sm">65 songs</p>
+                    <div class="stat">
+                        <div class="stat-label">Gold</div>
+                        <div class="stat-value" id="gold">50</div>
                     </div>
-                </div>
-                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="400">
-                    <img src="http://static.photos/music/640x360/4" alt="Playlist" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold">Party Hits</h3>
-                        <p class="text-gray-400 text-sm">150 songs</p>
+                    <div class="stat">
+                        <div class="stat-label">XP</div>
+                        <div class="stat-value" id="xp">0/100</div>
                     </div>
-                </div>
-                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="500">
-                    <img src="http://static.photos/music/640x360/5" alt="Playlist" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold">Sleep Sounds</h3>
-                        <p class="text-gray-400 text-sm">50 songs</p>
-                    </div>
-                </div>
-                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="600">
-                    <img src="http://static.photos/music/640x360/6" alt="Playlist" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-semibold">Road Trip</h3>
-                        <p class="text-gray-400 text-sm">90 songs</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Music Player -->
-    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 music-player z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4 w-1/4">
-                    <img src="http://static.photos/music/200x200/7" alt="Album" class="w-12 h-12 rounded">
-                    <div>
-                        <h4 class="font-medium">Current Song</h4>
-                        <p class="text-sm text-gray-400">Artist Name</p>
-                    </div>
-                    <button class="text-gray-400 hover:text-white">
-                        <i data-feather="heart"></i>
-                    </button>
                 </div>
                 
-                <div class="w-2/4">
-                    <div class="flex justify-center space-x-6 mb-2">
-                        <button class="text-gray-400 hover:text-white">
-                            <i data-feather="skip-back"></i>
-                        </button>
-                        <button class="bg-white text-gray-900 p-2 rounded-full hover:bg-gray-200">
-                            <i data-feather="play"></i>
-                        </button>
-                        <button class="text-gray-400 hover:text-white">
-                            <i data-feather="skip-forward"></i>
-                        </button>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <span class="text-xs text-gray-400">1:23</span>
-                        <div class="progress-bar flex-grow rounded-full">
-                            <div class="progress rounded-full"></div>
+                <div class="game-screen">
+                    <div class="screen-content">
+                        <h2 id="location">Forest Path</h2>
+                        <p id="scene-description">You are on a path through a dense forest. The trees are tall and the path is narrow. You hear birds chirping in the distance.</p>
+                        
+                        <div class="enemy" id="enemy-display">🐺</div>
+                        
+                        <div class="health-bar">
+                            <div class="health-fill" id="health-bar"></div>
                         </div>
-                        <span class="text-xs text-gray-400">3:45</span>
+                        
+                        <div class="battle-log" id="battle-log">
+                            <div class="log-entry">Welcome to RPG Adventure!</div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button id="action-btn">Explore</button>
+                            <button id="inventory-btn">Inventory</button>
+                            <button id="quest-btn">Quests</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="inventory-container">
+                    <h3>Inventory</h3>
+                    <div class="inventory-items" id="inventory">
+                        <div class="item">
+                            <div class="item-icon">⚔️</div>
+                            <div class="item-name">Iron Sword</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-icon">🛡️</div>
+                            <div class="item-name">Wooden Shield</div>
+                        </div>
+                        <div class="item">
+                            <div class="item-icon">❤️</div>
+                            <div class="item-name">Health Potion (3)</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="flex items-center justify-end space-x-4 w-1/4">
-                    <button class="text-gray-400 hover:text-white">
-                        <i data-feather="repeat"></i>
-                    </button>
-                    <button class="text-gray-400 hover:text-white">
-                        <i data-feather="shuffle"></i>
-                    </button>
-                    <div class="flex items-center space-x-2">
-                        <i data-feather="volume-2" class="text-gray-400"></i>
-                        <div class="w-20 h-1 bg-gray-600 rounded-full">
-                            <div class="h-1 bg-blue-500 rounded-full w-3/4"></div>
+                <div class="quest-container">
+                    <h3>Active Quests</h3>
+                    <div class="quest-list" id="quests">
+                        <div class="quest">
+                            <div class="quest-icon">⭐</div>
+                            <div class="quest-details">Defeat 5 forest creatures (0/5)</div>
+                        </div>
+                        <div class="quest">
+                            <div class="quest-icon">⭐</div>
+                            <div class="quest-details">Collect 10 gold coins (0/10)</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <footer>
+            <p>RPG Adventure Game | Created for GitHub Deployment</p>
+        </footer>
     </div>
 
     <script>
-        VANTA.WAVES({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x1e293b,
-            shininess: 35.00,
-            waveHeight: 15.00,
-            waveSpeed: 0.75,
-            zoom: 0.85
-        });
-    </script>
-    <script>AOS.init();</script>
-    <script>feather.replace();</script>
-</body>
-      </html>
+        // Game state
+        const gameState = {
+            health: 100,
+            maxHealth: 100,
+            level: 1,
+            xp: 0,
+            xpToNextLevel: 100,
+            gold: 50,
+            location: 'forest',
+            inCombat: false,
+            enemy: null,
+            enemyHealth: 0,
+            enemyMaxHealth: 0,
+            inventory: [
+                { id: 1, name: 'Iron Sword', type: 'weapon', icon: '⚔️' },
+                { id: 2, name: 'Wooden Shield', type: 'armor', icon: '🛡️' },
+                { id: 3, name: 'Health Potion', type: 'potion', icon: '❤️', quantity: 3 }
+            ],
+            quests: [
+                { id: 1, name: 'Forest Creatures', description: 'Defeat 5 forest creatures', completed: false, progress: 0, target: 5, reward: { xp: 50, gold: 25 } },
+                { id: 2, name: 'Gold Collection', description: 'Collect 10 gold coins', completed: false, progress: 0, target: 10, reward: { xp: 30, gold: 50 } }
+            ]
+        };
+
+        // Enemy types
+        const enemies = [
+            { name: 'Forest Wolf', health: 30, icon: '🐺', minLevel: 1, xp: 15, gold: 5 },
+            { name: 'Goblin', health: 40, icon: '👺', minLevel: 1, xp: 20, gold: 8 },
+            { name: 'Forest Troll', health: 60, icon: '👹', minLevel: 2, xp: 30, gold: 15 },
+            { name: 'Bandit', health: 50, icon: '😠', minLevel: 2, xp: 25, gold: 12 }
+        ];
+
+        // Locations
+        const locations = {
+            forest: {
+                name: 'Forest Path',
+                description: 'You are on a path through a dense forest. The trees are tall and the path is narrow. You hear birds chirping in the distance.',
+                enemies: ['Forest Wolf', 'Goblin']
+            },
+            cave: {
+                name: 'Dark Cave',
+                description: 'You enter a dark and damp cave. Water drips from the stalactites above. Your footsteps echo in the silence.',
+                enemies: ['Goblin', 'Forest Troll']
+            },
+            village: {
+                name: 'Village',
+                description: 'You arrive at a small village. People are going about their daily business. The village seems peaceful.',
+                enemies: ['Bandit']
+            }
+        };
+
+        // DOM elements
+        const healthElement = document.getElementById('health');
+        const levelElement = document.getElementById('level');
+        const goldElement = document.getElementById('gold');
+        const xpElement = document.getElementById('xp');
+        const locationElement = document.getElementById('location');
+        const sceneDescriptionElement = document.getElementById('scene-description');
+        const enemyDisplayElement = document.getElementById('enemy-display');
+        const healthBarElement = document.getElementById('health-bar');
+        const battleLogElement = document.getElementById('battle-log');
+        const actionBtn = document.getElementById('action-btn');
+        const inventoryBtn = document.getElementById('inventory-btn');
+        const questBtn = document.getElementById('quest-btn');
+
+        // Initialize game
+        function initGame() {
+            updateStats();
+            updateLocation();
+            
+            // Event listeners
+            actionBtn.addEventListener('click', handleAction);
+            inventoryBtn.addEventListener('click', showInventory);
+            questBtn.addEventListener('click', showQuests);
+        }
+
+        // Update game stats display
+        function updateStats() {
+            healthElement.textContent = `${gameState.health}/${gameState.maxHealth}`;
+            levelElement.textContent = gameState.level;
+            goldElement.textContent = gameState.gold;
+            xpElement.textContent = `${gameState.xp}/${gameState.xpToNextLevel}`;
+            healthBarElement.style.width = `${(gameState.health / gameState.maxHealth) * 100}%`;
+        }
+
+        // Update location display
+        function updateLocation() {
+            const location = locations[gameState.location];
+            locationElement.textContent = location.name;
+            sceneDescriptionElement.textContent = location.description;
+        }
+
+        // Handle main action button
+        function handleAction() {
+            if (gameState.inCombat) {
+                attackEnemy();
+            } else {
+                explore();
+            }
+        }
+
+        // Explore the current location
+        function explore() {
+            const rand = Math.random();
+            
+            if (rand < 0.6) {
+                // Encounter an enemy
+                startCombat();
+            } else if (rand < 0.8) {
+                // Find gold
+                const goldFound = Math.floor(Math.random() * 10) + 5;
+                gameState.gold += goldFound;
+                addLogEntry(`You found ${goldFound} gold coins!`);
+                
+                // Update quest progress
+                updateQuestProgress('Gold Collection', goldFound);
+            } else {
+                // Find a potion
+                const potionIndex = gameState.inventory.findIndex(item => item.name === 'Health Potion');
+                if (potionIndex !== -1) {
+                    gameState.inventory[potionIndex].quantity++;
+                } else {
+                    gameState.inventory.push({ id: 3, name: 'Health Potion', type: 'potion', icon: '❤️', quantity: 1 });
+                }
+                addLogEntry('You found a Health Potion!');
+            }
+            
+            updateStats();
+        }
+
+        // Start combat with a random enemy
+        function startCombat() {
+            const locationEnemies = locations[gameState.location].enemies;
+            const availableEnemies = enemies.filter(enemy => locationEnemies.includes(enemy.name));
+            const enemy = availableEnemies[Math.floor(Math.random() * availableEnemies.length)];
+            
+            gameState.inCombat = true;
+            gameState.enemy = enemy;
+            gameState.enemyHealth = enemy.health;
+            gameState.enemyMaxHealth = enemy.health;
+            
+            enemyDisplayElement.textContent = enemy.icon;
+            actionBtn.textContent = 'Attack';
+            addLogEntry(`A wild ${enemy.name} appears!`);
+        }
+
+        // Attack the current enemy
+        function attackEnemy() {
+            if (!gameState.inCombat || !gameState.enemy) return;
+            
+            // Player attacks
+            const playerDamage = Math.floor(Math.random() * 15) + 5;
+            gameState.enemyHealth -= playerDamage;
+            addLogEntry(`You hit the ${gameState.enemy.name} for ${playerDamage} damage!`);
+            
+            // Check if enemy is defeated
+            if (gameState.enemyHealth <= 0) {
+                defeatEnemy();
+                return;
+            }
+            
+            // Enemy attacks
+            const enemyDamage = Math.floor(Math.random() * 10) + 3;
+            gameState.health -= enemyDamage;
+            addLogEntry(`The ${gameState.enemy.name} hits you for ${enemyDamage} damage!`);
+            
+            // Check if player is defeated
+            if (gameState.health <= 0) {
+                gameState.health = 0;
+                addLogEntry('You have been defeated! Restoring health.');
+                gameState.inCombat = false;
+                actionBtn.textContent = 'Explore';
+                gameState.health = gameState.maxHealth;
+            }
+            
+            updateStats();
+        }
+
+        // Handle enemy defeat
+        function defeatEnemy() {
+            addLogEntry(`You defeated the ${gameState.enemy.name}!`);
+            
+            // Award XP and gold
+            gameState.xp += gameState.enemy.xp;
+            gameState.gold += gameState.enemy.gold;
+            addLogEntry(`Gained ${gameState.enemy.xp} XP and ${gameState.enemy.gold} gold!`);
+            
+            // Update quest progress
+            updateQuestProgress('Forest Creatures', 1);
+            
+            // Check for level up
+            checkLevelUp();
+            
+            // Reset combat state
+            gameState.inCombat = false;
+            actionBtn.textContent = 'Explore';
+            
+            updateStats();
+        }
+
+        // Check if player has enough XP to level up
+        function checkLevelUp() {
+            if (gameState.xp >= gameState.xpToNextLevel) {
+                gameState.level++;
+                gameState.xp -= gameState.xpToNextLevel;
+                gameState.xpToNextLevel = Math.floor(gameState.xpToNextLevel * 1.5);
+                gameState.maxHealth += 20;
+                gameState.health = gameState.maxHealth;
+                
+                addLogEntry(`You reached level ${gameState.level}! Health increased.`);
+                updateStats();
+            }
+        }
+
+        // Update quest progress
+        function updateQuestProgress(questName, amount) {
+            const quest = gameState.quests.find(q => q.name === questName);
+            if (quest && !quest.completed) {
+                quest.progress += amount;
+                if (quest.progress >= quest.target) {
+                    quest.completed = true;
+     
