@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony | Music Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .music-player {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            width: 30%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen" id="vanta-bg">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-feather="music" class="text-blue-400"></i>
+                <span class="text-xl font-bold">Harmony</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-blue-400 transition">Discover</a>
+                <a href="#" class="hover:text-blue-400 transition">Genres</a>
+                <a href="#" class="hover:text-blue-400 transition">Artists</a>
+                <a href="#" class="hover:text-blue-400 transition">Playlists</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-gray-700 transition">
+                    <i data-feather="search"></i>
+                </button>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-700 transition">
+                    <i data-feather="menu"></i>
+                </button>
+                <button class="hidden md:block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full transition">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto text-center" data-aos="fade-up">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Listen to Your Favorite <span class="text-blue-400">Music</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">Stream millions of songs, discover new artists, and create your perfect playlist.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full text-lg font-medium transition transform hover:scale-105">
+                    Start Listening Free
+                </button>
+                <button class="bg-transparent border-2 border-gray-600 hover:border-blue-400 px-8 py-4 rounded-full text-lg font-medium transition transform hover:scale-105">
+                    Explore Premium
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Playlists -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10" data-aos="fade-right">Featured Playlists</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <!-- Playlist Cards -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <img src="http://static.photos/music/640x360/1" alt="Playlist" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Chill Vibes</h3>
+                        <p class="text-gray-400 text-sm">120 songs</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <img src="http://static.photos/music/640x360/2" alt="Playlist" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Workout Mix</h3>
+                        <p class="text-gray-400 text-sm">85 songs</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <img src="http://static.photos/music/640x360/3" alt="Playlist" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Focus Flow</h3>
+                        <p class="text-gray-400 text-sm">65 songs</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                    <img src="http://static.photos/music/640x360/4" alt="Playlist" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Party Hits</h3>
+                        <p class="text-gray-400 text-sm">150 songs</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="500">
+                    <img src="http://static.photos/music/640x360/5" alt="Playlist" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Sleep Sounds</h3>
+                        <p class="text-gray-400 text-sm">50 songs</p>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg overflow-hidden transition transform hover:scale-105 hover:shadow-lg" data-aos="fade-up" data-aos-delay="600">
+                    <img src="http://static.photos/music/640x360/6" alt="Playlist" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold">Road Trip</h3>
+                        <p class="text-gray-400 text-sm">90 songs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Player -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-800 music-player z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 w-1/4">
+                    <img src="http://static.photos/music/200x200/7" alt="Album" class="w-12 h-12 rounded">
+                    <div>
+                        <h4 class="font-medium">Current Song</h4>
+                        <p class="text-sm text-gray-400">Artist Name</p>
+                    </div>
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="heart"></i>
+                    </button>
+                </div>
+                
+                <div class="w-2/4">
+                    <div class="flex justify-center space-x-6 mb-2">
+                        <button class="text-gray-400 hover:text-white">
+                            <i data-feather="skip-back"></i>
+                        </button>
+                        <button class="bg-white text-gray-900 p-2 rounded-full hover:bg-gray-200">
+                            <i data-feather="play"></i>
+                        </button>
+                        <button class="text-gray-400 hover:text-white">
+                            <i data-feather="skip-forward"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs text-gray-400">1:23</span>
+                        <div class="progress-bar flex-grow rounded-full">
+                            <div class="progress rounded-full"></div>
+                        </div>
+                        <span class="text-xs text-gray-400">3:45</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-end space-x-4 w-1/4">
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="repeat"></i>
+                    </button>
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="shuffle"></i>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <i data-feather="volume-2" class="text-gray-400"></i>
+                        <div class="w-20 h-1 bg-gray-600 rounded-full">
+                            <div class="h-1 bg-blue-500 rounded-full w-3/4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        VANTA.WAVES({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1e293b,
+            shininess: 35.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.75,
+            zoom: 0.85
+        });
+    </script>
+    <script>AOS.init();</script>
+    <script>feather.replace();</script>
+</body>
+      </html>
